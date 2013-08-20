@@ -1,0 +1,10 @@
+#Level should be 11 - 13 for entire chromosomes at reasonable coverage
+#p-value shouldn't be bigger than 1e-10 (too lenient), but reasonably larger than 1e-30 (too aggressive)
+#you need a minuimum 25g of memory on the cluster to run
+#
+#./waveseq_proc <input.h5_file> <level> <output_prefix> <p_value> <chr>
+#
+#
+
+/.mounts/labs/lakshmilab/private/SequencingData/ICGC/scripts/run_waveseq_check.sh /.mounts/labs/lakshmilab/private/SequencingData/ICGC/filtered_pipeline/validation/MCR ${1} ${2} sqtwolog GposRd ${3} 0 [] [] 1 ${4} ${5} 1
+
