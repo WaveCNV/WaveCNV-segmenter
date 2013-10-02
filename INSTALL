@@ -1,0 +1,54 @@
+WaveCNV-segmenter
+
+1. Prerequisites for Deployment
+
+. Precompiled binaries for use with the free MATLAB MCR are available for 64-bit Linux only.  If
+  you have Mac OSX or 32-bit Linux you will need to have the full version of MATLAB to compile
+  from source. 
+
+  (a) On 64-bit Linux you must have the MATLAB Compiler Runtime (MCR) version 8.0 (R2012b 64-bit)
+
+  (b) Alternatively you can compile from source if you have have MATLAB versions 2010+
+
+. If the MCR is not installed, Download and install the MCR installer from the MathWorks Web site:
+      http://www.mathworks.com/products/compiler/mcr/index.html
+
+. If compiling from source, make sure that 'mcc' is in your executaion path, and that you have
+  installed the MCR that came with your MATLAB version (not installed by default).
+
+For more information about the MCR and the MCR Installer, see 
+Distribution to End Users in the MATLAB Compiler documentation  
+in the MathWorks Documentation Center.    
+
+NOTE: You may need administrator rights to run the installer.
+
+
+2. Installing WaveCNV-segmenter
+
+. In a terminal window, change to the .../WaveCNV/segmenter/src/ directory.
+
+. Configure the installation by running 'perl Build.PL'  on the command line.
+
+. Answer questions as to whether you want to compile from source, and the location of the MATLAB
+  MCR directory.
+
+. After configuration run './Build install'. This will compile any needed code and put the
+  segmenter.pl scipt in your .../WaveCNV/segmenter/bin/ directory. It is recommnded that you add
+  this directory to your PATH environmental variable. 
+
+
+3. To run WaveCNV
+
+. Run .../WaveCNV/segmenter/bin/segmenter.pl with a standard pileup file generated from SAM/BAM
+  files using the 'samtools mpileup' utility.
+
+  Example: .../WaveCNV/segmenter/bin/segmenter.pl trio1.pileup
+
+. Output will be a segment file containing CHR, START, and END position.  Use theis file as input
+  to the WaveCNV-caller.
+
+. Example data is included in the .../WaveCNV/segmenter/example_data/ directory.
+
+. The current version of WaveCNV-segmenter is memory intensive, so at least 25Gb of RAM is recommended.
+
+

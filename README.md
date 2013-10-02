@@ -1,4 +1,4 @@
-WaveSeq-segmenter-lite
+WaveCNV-segmenter
 ======================
 
-Lighter version of the segmenter.  Requires the user to install more software themselves
+Identify CNV boundaries from Next Generation sequence data using wavelet transforms
