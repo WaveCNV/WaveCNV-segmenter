@@ -255,10 +255,14 @@ else{ #use precompiled binary
 }
 
 #segmenter here
-my @results;
+my %results;
 foreach my $chr (keys %finished){
     next if($chr eq 'chrMT' || $chr eq 'chrM');
-    next if(-f "$segdir/$chr.seg_short");
+    if(-f "$segdir/$chr.seg_short"){
+	$results{$chr} = "$segdir/$chr.seg";
+	next;
+    }
+
     my @args = ("$h5dir/$chr.h5",
 		$level,
 		$threshmethod,
@@ -274,5 +278,22 @@ foreach my $chr (keys %finished){
     
 
     system($EXE, @args) && die "ERROR: Segmenter failed on $chr\n";
-    push(@results, "$segdir/$chr.seg");
+    $results{$chr} = "$segdir/$chr.seg";
+}
+
+#print out results
+foreach my $chr (keys %results){
+    my $f = $results{$chr};
+
+    open(IN, "< $f");
+    while(my $line = <IN>){
+	chomp $line;
+	next if(! $line);
+	my @F = split(/\t/, $line);
+	shift @F; #drop index loc
+	shift @F; #drop index loc
+	unshift(@F, $chr); #add chr
+	print join("\t", @F)."\n";
+    }
+    close(IN);
 }
