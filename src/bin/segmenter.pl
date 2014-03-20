@@ -109,7 +109,7 @@ foreach my $f (<$h5dir/*.h5>){
 }
 
 unless($finished{$chr_select}){
-    my $tell = 30000000000;
+    my $tell;
     if(-f "$outdir/tell"){
 	open(TELL, "<$outdir/tell");
 	my $tell = <TELL>;
@@ -122,9 +122,6 @@ unless($finished{$chr_select}){
     my $OUT;
     open(IN, "<$file");
     seek(IN,$tell,0) if(defined($tell));
-    if($tell == 30000000000){ #temp
-	<IN>; #temp
-    } #temp
     while(my $line = <IN>){
 	chomp $line;
 	my @F = split(/\t/, $line);
@@ -257,7 +254,7 @@ else{ #use precompiled binary
 #segmenter here
 my %results;
 foreach my $chr (keys %finished){
-    next if($chr eq 'chrMT' || $chr eq 'chrM');
+    #next if($chr eq 'chrMT' || $chr eq 'chrM');
     if(-f "$segdir/$chr.seg_short"){
 	$results{$chr} = "$segdir/$chr.seg";
 	next;
